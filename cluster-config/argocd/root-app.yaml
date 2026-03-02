@@ -10,6 +10,8 @@ spec:
     repoURL: https://github.com/git-ashu/devops-platform.git
     targetRevision: master
     path: cluster-config
+    directory:
+      recurse: true
 
   destination:
     server: https://kubernetes.default.svc
