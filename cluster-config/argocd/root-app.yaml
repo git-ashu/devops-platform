@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: git@github.com:git-ashu/devops-platform.git
+    repoURL: https://github.com/git-ashu/devops-platform.git
     targetRevision: master
     path: cluster-config
 
