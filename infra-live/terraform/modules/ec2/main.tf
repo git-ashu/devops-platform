@@ -126,4 +126,11 @@ resource "aws_autoscaling_group" "app_asg" {
   }
 
   health_check_type = "EC2"
+
+  tag {
+    key                 = "Name"
+    value               = "enterprise-app-node"
+    propagate_at_launch = true
+  }
+
 }

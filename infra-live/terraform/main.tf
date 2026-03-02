@@ -24,3 +24,29 @@ module "ec2" {
   public_subnet_1  = module.vpc.public_subnet_1_id
   public_subnet_2  = module.vpc.public_subnet_2_id
 }
+
+module "eks" {
+  source = "./modules/eks"
+
+  cluster_name     = "enterprise-eks"
+
+  private_subnet_1 = module.vpc.private_subnet_1_id
+  private_subnet_2 = module.vpc.private_subnet_2_id
+}
+
+module "platform" {
+  source = "./modules/platform"
+
+  depends_on = [
+    module.eks
+  ]
+}
+
+module "kafka" {
+  source = "./modules/kafka"
+
+  vpc_id    = module.vpc.vpc_id
+  subnet_id = module.vpc.private_subnet_1_id
+  key_name  = "enterprise-key"
+}
+
