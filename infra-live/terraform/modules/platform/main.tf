@@ -21,6 +21,10 @@ resource "helm_release" "mongodb" {
 
   namespace        = "data"
   create_namespace = true
+  timeout = 600
+  wait    = true
+  atomic  = true
+  cleanup_on_fail = true
 
   set = [
     {
@@ -38,3 +42,17 @@ resource "helm_release" "mongodb" {
   ]
 }
 
+resource "helm_release" "ebs_csi_driver" {
+  name       = "aws-ebs-csi-driver"
+  repository = "https://kubernetes-sigs.github.io/aws-ebs-csi-driver"
+  chart      = "aws-ebs-csi-driver"
+
+  namespace = "kube-system"
+
+  set = [
+    {
+      name  = "controller.serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+      value = var.ebs_csi_role_arn
+    }
+  ]
+}

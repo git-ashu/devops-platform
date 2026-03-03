@@ -50,3 +50,10 @@ module "kafka" {
   key_name  = "enterprise-key"
 }
 
+module "argocd" {
+  source = "./modules/argocd"
+
+  depends_on = [
+    module.eks
+  ]
+}
