@@ -1,21 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: platform-root
+  name: transaction-service
   namespace: argocd
+
 spec:
   project: default
 
   source:
     repoURL: https://github.com/git-ashu/devops-platform.git
     targetRevision: master
-    path: cluster-config/apps
+    path: cluster-config/helm/transaction-service
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: apps
 
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,9 @@
+image:
+  repository: ashup1997/transaction-service
+  tag: latest
+
+service:
+  port: 8080
+
+container:
+  port: 8080
