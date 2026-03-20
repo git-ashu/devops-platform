@@ -23,6 +23,8 @@ spec:
           serviceAccount:
             create: false
             name: jenkins
+          persistence:
+            enabled: false
 
   destination:
     server: https://kubernetes.default.svc
