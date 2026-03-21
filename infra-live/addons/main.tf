@@ -30,3 +30,7 @@ resource "helm_release" "prometheus_crds" {
   ]
   timeout = 600
 }
+
+resource "kubernetes_manifest" "argocd_root_app" {
+  manifest = yamldecode(file("${path.module}/../../cluster-config/argocd/root-app.yaml"))
+}
