@@ -25,11 +25,17 @@ spec:
             name: jenkins
 
           persistence:
-            enabled: false
+            enabled: true
 
           securityContext:
             runAsUser: 0
             fsGroup: 0
+          containerSecurityContext:
+            runAsUser: 0
+            allowPrivilegeEscalation: true
+          initContainerEnv:
+            - name: JAVA_OPTS
+              value: "-Djenkins.install.runSetupWizard=false"
 
   destination:
     server: https://kubernetes.default.svc
